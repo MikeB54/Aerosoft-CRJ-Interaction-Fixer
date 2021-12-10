@@ -14,9 +14,9 @@ namespace AerosoftCRJInteractionFixer
 		static string OriginalPackageName = "aerosoft-crj";
 		static string PatchPackageName = "aerosoft-crj-interaction-fix";
 
-		static string OriginalPackageVersionRequirement_Community = "1.0.6";
-		static string OriginalPackageVersionRequirement_Marketplace = "1.0.9";
-		static string PatchPackageVersion = "1.0.0";
+		static string OriginalPackageVersionRequirement_Community = "1.0.15";
+		static string OriginalPackageVersionRequirement_Marketplace = "1.0.15";
+		static string PatchPackageVersion = "1.0.2";
 
 		static JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
 		{
@@ -58,7 +58,7 @@ namespace AerosoftCRJInteractionFixer
 
 			Log( "Checking package dependencies" );
 
-			// Ensure the version is 1.0.6 or 1.0.9, depending on the package source
+			// Ensure the version is 1.0.15 or 1.0.15, depending on the package source
 			string OriginalPackageVersionRequirement = MarketplacePackage ? OriginalPackageVersionRequirement_Marketplace : OriginalPackageVersionRequirement_Community;
 
 			var OriginalPackageManifestPath = Path.Combine( OriginalPackagePath, "manifest.json" );
@@ -119,6 +119,28 @@ namespace AerosoftCRJInteractionFixer
 			if ( !ProcessModelBehaviors( OriginalPackagePath, PatchPackagePath, "Aerosoft_CRJ_700", "CRJ700_Interior.xml" ) )
 			{
 				DeleteDirectory( PatchPackagePath );
+
+				WriteFailureMessage();
+				WaitForExit();
+
+				return;
+			}
+
+			Log("Processing 'CRJ700_Interior.xml' files");
+			if (!ProcessModelBehaviors(OriginalPackagePath, PatchPackagePath, "Aerosoft_CRJ_900", "CRJ900_Interior.xml"))
+			{
+				DeleteDirectory(PatchPackagePath);
+
+				WriteFailureMessage();
+				WaitForExit();
+
+				return;
+			}
+
+			Log("Processing 'CRJ700_Interior.xml' files");
+			if (!ProcessModelBehaviors(OriginalPackagePath, PatchPackagePath, "Aerosoft_CRJ_1000", "CRJ1000_Interior.xml"))
+			{
+				DeleteDirectory(PatchPackagePath);
 
 				WriteFailureMessage();
 				WaitForExit();
