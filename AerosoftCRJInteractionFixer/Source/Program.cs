@@ -14,9 +14,9 @@ namespace AerosoftCRJInteractionFixer
 		static string OriginalPackageName = "aerosoft-crj";
 		static string PatchPackageName = "aerosoft-crj-interaction-fix";
 
-		static string OriginalPackageVersionRequirement_Community = "1.0.15";
-		static string OriginalPackageVersionRequirement_Marketplace = "1.0.15";
-		static string PatchPackageVersion = "1.0.2";
+		static string OriginalPackageVersionRequirement_Community = "1.0.18";
+		static string OriginalPackageVersionRequirement_Marketplace = "1.0.18";
+		static string PatchPackageVersion = "1.0.3";
 
 		static JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
 		{
@@ -58,7 +58,7 @@ namespace AerosoftCRJInteractionFixer
 
 			Log( "Checking package dependencies" );
 
-			// Ensure the version is 1.0.15 or 1.0.15, depending on the package source
+			// Ensure the version is 1.0.18 or 1.0.18, depending on the package source
 			string OriginalPackageVersionRequirement = MarketplacePackage ? OriginalPackageVersionRequirement_Marketplace : OriginalPackageVersionRequirement_Community;
 
 			var OriginalPackageManifestPath = Path.Combine( OriginalPackagePath, "manifest.json" );
